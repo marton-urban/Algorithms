@@ -6,9 +6,11 @@ l = [[1, 0, 4], [1, 0, 6], [1, 0, 7], [1, 4, 0], [1, 4, 6], [1, 4, 7], [1, 6, 0]
 one_digit_wrong1 = str(147)
 
 for place in range(3):
-     [ l.remove(possible_comb) for possible_comb in l.copy() if int(one_digit_wrong1[place]) in possible_comb and int(one_digit_wrong1[place]) == possible_comb[place] ]
-     place += 1
+    [l.remove(possible_comb) for possible_comb in l.copy() if
+     int(one_digit_wrong1[place]) in possible_comb and
+     int(one_digit_wrong1[place]) == possible_comb[place]
+     ]
+    place += 1
 
 print(l)
 print(len(l))
-
