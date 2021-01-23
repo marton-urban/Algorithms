@@ -5,8 +5,8 @@ one_digit_wrong2 = str(286)
 two_correct = str(964)
 
 all_digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-# possible_digits = [digit for digit in all_digits if digit not in wrong_digits]
 possible_combs = []
+
 possible_digits_left = [digit for digit in range(10) if
                         str(digit) != one_digit_right[0] and
                         str(digit) != one_digit_right[1] and
@@ -74,7 +74,7 @@ for place in range(3):
     place += 1
 # 3 left
 
-"""One digit is right but in the wrong place (964)"""
+"""One digit is right but in the wrong place (third)"""
 for place in range(3):
     [possible_combs.remove(possible_combination) for possible_combination in possible_combs.copy()
      if int(two_correct[place]) == possible_combination[place] or
