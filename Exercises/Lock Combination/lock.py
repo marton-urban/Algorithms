@@ -26,7 +26,7 @@ for digit in range(len(possible_digits_left)):
             one_possible_comb.append(digit2)
             possible_combs.append(one_possible_comb.copy())
             one_possible_comb.pop()
-# +12 possiblity
+# +12 possiblities
 
 """One digit is right and its place (second digit)"""
 for digit in possible_digits_left:
@@ -38,7 +38,7 @@ for digit in possible_digits_left:
             one_possible_comb.append(digit2)
             possible_combs.append(one_possible_comb.copy())
             one_possible_comb.pop()
-# +12 possiblity
+# +12 possiblities
 
 
 """One digit is right and its place (third digit)"""
@@ -52,7 +52,7 @@ for digit in possible_digits_left:
             possible_combs.append(one_possible_comb.copy())
             one_possible_comb.pop()
             one_possible_comb.pop()
-# +12 possiblity = 36 left
+# +12 possiblities = 36 left
 
 """For rules 1, 3 and 5.
 "two digits are correct but both are in the wrong place" =
