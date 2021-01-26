@@ -155,3 +155,12 @@ for digit01 in range(1, 10):
                                                                       end="")
                                                                 for combination in possible_combs:
                                                                     print(''.join(map(str, combination)), end=" ")
+
+                                                                end = time.time()
+                                                                if end - start >= 0 :
+                                                                    hours, rem = divmod(end - start, 3600)
+                                                                    minutes, seconds = divmod(rem, 60)
+                                                                    print("\t({:0>2}:{:0>2}:{:05.2f})".format(
+                                                                            int(hours),
+                                                                            int(minutes),
+                                                                            seconds,))
