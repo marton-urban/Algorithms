@@ -11,43 +11,69 @@ start = time.time()
 
 
 def current_time(digit, name):
-        if digit > 0 and digit < 2:
             end = time.time()
-            hours, rem = divmod(end - start, 3600)
-            minutes, seconds = divmod(rem, 60)
-            print("{:0>2}:{:0>2}:{:05.2f} - {} {} {} {} {} ({})".format(int(hours),
-                                                                        int(minutes),
-                                                                        seconds,
-                                                                        one_digit_wrong1,
-                                                                        one_digit_right,
-                                                                        two_correct,
-                                                                        wrong_digits,
-                                                                        one_digit_wrong2,
-                                                                        name))
+            if end - start > 1:
+                hours, rem = divmod(end - start, 3600)
+                minutes, seconds = divmod(rem, 60)
+                print("{:0>2}:{:0>2}:{:05.2f} - {} {} {} {} {} ({})".format(int(hours),
+                                                                            int(minutes),
+                                                                            seconds,
+                                                                            one_digit_wrong1,
+                                                                            one_digit_right,
+                                                                            two_correct,
+                                                                            wrong_digits,
+                                                                            one_digit_wrong2,
+                                                                            name))
 
 
-for digit01 in range(10):
-    for digit02 in range(10):
-        for digit03 in range(10):
+for digit01 in range(1, 10):
+    current_time(digit01, 'Digit01')
+    for digit02 in range(1, 10):
+        if digit02 == digit01:
+            continue
+        current_time(digit02, 'Digit02')
+        for digit03 in range(1, 10):
+            if digit03 == digit02 or digit03 == digit01:
+                continue
+            current_time(digit03, 'Digit03')
             one_digit_wrong1 = f"{digit01}{digit02}{digit03}"
-            for digit04 in range(10):
-                for digit05 in range(10):
-                    for digit06 in range(10):
+            for digit04 in range(1, 10):
+                current_time(digit04, 'Digit04')
+                for digit05 in range(1, 10):
+                    if digit05 == digit04:
+                        continue
+                    current_time(digit05, 'Digit05')
+                    for digit06 in range(1, 10):
+                        if digit06 == digit05 or digit06 == digit04:
+                            continue
+                        current_time(digit06, 'Digit06')
                         one_digit_right = f"{digit04}{digit05}{digit06}"
-                        for digit07 in range(10):
-                            for digit08 in range(10):
+                        for digit07 in range(1, 10):
+                            current_time(digit07, 'Digit07')
+                            for digit08 in range(1, 10):
+                                if digit08 == digit07:
+                                    continue
                                 current_time(digit08, 'Digit08')
-                                for digit09 in range(10):
+                                for digit09 in range(1, 10):
+                                    if digit09 == digit08 or digit09 == digit07:
+                                        continue
                                     current_time(digit09, 'Digit09')
                                     two_correct = f"{digit07}{digit08}{digit09}"
-                                    for digit10 in range(10):
-                                        current_time(digit10, 'Digit10')
-                                        for digit11 in range(10):
-                                            for digit12 in range(10):
+                                    for digit10 in range(1, 10):
+                                        for digit11 in range(1, 10):
+                                            if digit11 == digit10:
+                                                continue
+                                            for digit12 in range(1, 10):
+                                                if digit12 == digit11 or digit12 == digit10:
+                                                    continue
                                                 wrong_digits = f"{digit10}{digit11}{digit12}"
-                                                for digit13 in range(10):
-                                                    for digit14 in range(10):
-                                                        for digit15 in range(10):
+                                                for digit13 in range(1, 10):
+                                                    for digit14 in range(1, 10):
+                                                        if digit14 == digit13:
+                                                            continue
+                                                        for digit15 in range(1, 10):
+                                                            if digit15 == digit14 or digit15 == digit13:
+                                                                continue
                                                             one_digit_wrong2 = f"{digit13}{digit14}{digit15}"
                                                             one_digit_wrong = [one_digit_wrong1, one_digit_wrong2,
                                                                                two_correct]
@@ -96,10 +122,10 @@ for digit01 in range(10):
                                                             # 1 left
 
                                                             if possible_combs:
-                                                                print("\nHere are the possible combinations for : "
+                                                                print("\nHere are the possible combinations for "
                                                                       f"{one_digit_wrong1} {one_digit_right} "
                                                                       f"{two_correct} {wrong_digits} "
-                                                                      f"{one_digit_wrong2}",
+                                                                      f"{one_digit_wrong2}: ",
                                                                       end="")
                                                                 for combination in possible_combs:
                                                                     print(''.join(map(str, combination)), end=" ")
