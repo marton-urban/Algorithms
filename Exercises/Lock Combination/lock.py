@@ -12,8 +12,7 @@ possible_combs = []
 Remove the digits of rule 2 as well, because they will be referenced directly using 
 one_digit_right[0], one_digit_right[1], and one_digit_right[2] in the next loop."""
 possible_digits_left = [digit for digit in range(10) if str(digit) not in wrong_digits and
-                                                        str(digit) not in one_digit_right]
-
+                        str(digit) not in one_digit_right]
 
 """Adds all possible combinations by rule 2.
 Direct reference to the digits, all other decimal places will be filled from possible_digits_left."""
@@ -42,6 +41,6 @@ for rule in one_digit_wrong:
         place += 1
 # 1 left
 
-print("\nHere are the possible combinations: ",end="")
+print("\nHere are the possible combinations: ", end="")
 for combination in possible_combs:
-    print(''.join(map(str, combination)),end=" ")
+    print(''.join(map(str, combination)), end=" ")
