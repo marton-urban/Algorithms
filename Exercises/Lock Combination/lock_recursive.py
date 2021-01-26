@@ -9,7 +9,7 @@ for digit01 in range(10):
     for digit02 in range(10):
         for digit03 in range(10):
             one_digit_wrong1 = f"{digit01}{digit02}{digit03}"
-            for digit014in range(10):
+            for digit04 in range(10):
                 for digit05 in range(10):
                     for digit06 in range(10):
                         one_digit_right = f"{digit04}{digit05}{digit06}"
