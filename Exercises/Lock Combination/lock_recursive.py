@@ -79,6 +79,7 @@ for digit01 in range(1, 10):
                                         if occurences.count(digit10) == 2:
                                             continue
                                         occurences.append(digit10)
+                                        current_time(digit10, 'Digit10')
                                         for digit11 in range(1, 10):
                                             if digit11 == digit10 or occurences.count(digit11) == 2:
                                                 continue
@@ -147,7 +148,7 @@ for digit01 in range(1, 10):
                                                                     place += 1
                                                             # 1 left
 
-                                                            if possible_combs:
+                                                            if len(possible_combs) == 1:
                                                                 print("\nHere are the possible combinations for "
                                                                       f"{one_digit_wrong1} {one_digit_right} "
                                                                       f"{two_correct} {wrong_digits} "
