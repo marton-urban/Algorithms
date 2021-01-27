@@ -4,103 +4,97 @@
 # wrong_digits = input("All digit are wrong (example input: 523): ")
 # one_digit_wrong2 = input("One digit is right but in the wrong place (example input: 286): ")
 # one_digit_wrong = [one_digit_wrong1, one_digit_wrong2, two_correct]
-
 import time
 
+
+def current_time(name):
+    end = time.time()
+    if end - start > 1:
+        hours, rem = divmod(end - start, 3600)
+        minutes, seconds = divmod(rem, 60)
+        print("{:0>2}:{:0>2}:{:05.2f} - {} {} {} {} {} ({})".format(int(hours),
+                                                                    int(minutes),
+                                                                    seconds,
+                                                                    one_digit_wrong1,
+                                                                    one_digit_right,
+                                                                    two_correct,
+                                                                    wrong_digits,
+                                                                    one_digit_wrong2,
+                                                                    name))
+
+
+def not_allowed(digit_number, number_of_occ, time_it):
+    digit_number_rem = digit_number % 3
+    if digit_number_rem == 1:
+        if digit_number == 1:
+            occurences.clear()
+        if occurences.count(globals()[f'digit{digit_number}']) == number_of_occ:
+            return True
+    elif digit_number_rem == 2:
+        if globals()[f'digit{digit_number}'] == globals()[f'digit{digit_number - 1}'] or occurences.count(
+                globals()[f'digit{digit_number}']) == 2:
+            return True
+    elif digit_number_rem == 0:
+        if globals()[f'digit{digit_number}'] == globals()[f'digit{digit_number - 1}'] or globals()[
+            f'digit{digit_number}'] == globals()[f'digit{digit_number - 2}'] or occurences.count(
+                globals()[f'digit{digit_number}']) == 2:
+            return True
+    occurences.append(globals()[f'digit{digit_number}'])
+    if time_it:
+        current_time(f"Digit{digit_number}")
+
+
 start = time.time()
-
-
-def current_time(digit, name):
-            end = time.time()
-            if end - start > 1:
-                hours, rem = divmod(end - start, 3600)
-                minutes, seconds = divmod(rem, 60)
-                print("{:0>2}:{:0>2}:{:05.2f} - {} {} {} {} {} ({})".format(int(hours),
-                                                                            int(minutes),
-                                                                            seconds,
-                                                                            one_digit_wrong1,
-                                                                            one_digit_right,
-                                                                            two_correct,
-                                                                            wrong_digits,
-                                                                            one_digit_wrong2,
-                                                                            name))
-
 occurences = []
-for digit01 in range(1, 10):
-    occurences.clear()
-    if occurences.count(digit01) == 2:
+for digit1 in range(1, 10):
+    if not_allowed(1, 2, False):
         continue
-    occurences.append(digit01)
-    current_time(digit01, 'Digit01')
-    for digit02 in range(1, 10):
-        if digit02 == digit01 or occurences.count(digit02) == 2:
+    for digit2 in range(1, 10):
+        if not_allowed(2, 2, False):
             continue
-        occurences.append(digit02)
-        current_time(digit02, 'Digit02')
-        for digit03 in range(1, 10):
-            if digit03 == digit02 or digit03 == digit01 or occurences.count(digit03) == 2:
+        for digit3 in range(1, 10):
+            if not_allowed(3, 2, False):
                 continue
-            occurences.append(digit03)
-            current_time(digit03, 'Digit03')
-            one_digit_wrong1 = f"{digit01}{digit02}{digit03}"
-            for digit04 in range(1, 10):
-                if occurences.count(digit04) == 2:
+            one_digit_wrong1 = f"{digit1}{digit2}{digit3}"
+            for digit4 in range(1, 10):
+                if not_allowed(4, 2, False):
                     continue
-                occurences.append(digit04)
-                current_time(digit04, 'Digit04')
-                for digit05 in range(1, 10):
-                    if digit05 == digit04 or occurences.count(digit05) == 2:
+                for digit5 in range(1, 10):
+                    if not_allowed(5, 2, False):
                         continue
-                    occurences.append(digit05)
-                    current_time(digit05, 'Digit05')
-                    for digit06 in range(1, 10):
-                        if digit06 == digit05 or digit06 == digit04 or occurences.count(digit06) == 2:
+                    for digit6 in range(1, 10):
+                        if not_allowed(6, 2, False):
                             continue
-                        occurences.append(digit06)
-                        current_time(digit06, 'Digit06')
-                        one_digit_right = f"{digit04}{digit05}{digit06}"
-                        for digit07 in range(1, 10):
-                            if occurences.count(digit07) == 2:
+                        one_digit_right = f"{digit4}{digit5}{digit6}"
+                        for digit7 in range(1, 10):
+                            if not_allowed(7, 2, False):
                                 continue
-                            occurences.append(digit07)
-                            current_time(digit07, 'Digit07')
-                            for digit08 in range(1, 10):
-                                if digit08 == digit07 or occurences.count(digit08) == 2:
+                            for digit8 in range(1, 10):
+                                if not_allowed(8, 2, False):
                                     continue
-                                occurences.append(digit08)
-                                current_time(digit08, 'Digit08')
-                                for digit09 in range(1, 10):
-                                    if digit09 == digit08 or digit09 == digit07 or occurences.count(digit09) == 2:
+                                for digit9 in range(1, 10):
+                                    if not_allowed(9, 2, False):
                                         continue
-                                    occurences.append(digit09)
-                                    current_time(digit09, 'Digit09')
-                                    two_correct = f"{digit07}{digit08}{digit09}"
+                                    two_correct = f"{digit7}{digit8}{digit9}"
                                     for digit10 in range(1, 10):
-                                        if occurences.count(digit10) == 2:
+                                        if not_allowed(10, 2, False):
                                             continue
-                                        occurences.append(digit10)
-                                        current_time(digit10, 'Digit10')
                                         for digit11 in range(1, 10):
-                                            if digit11 == digit10 or occurences.count(digit11) == 2:
+                                            if not_allowed(11, 2, False):
                                                 continue
-                                            occurences.append(digit11)
                                             for digit12 in range(1, 10):
-                                                if digit12 == digit11 or digit12 == digit10 or occurences.count(digit12) == 2:
+                                                if not_allowed(12, 2, False):
                                                     continue
-                                                occurences.append(digit12)
                                                 wrong_digits = f"{digit10}{digit11}{digit12}"
                                                 for digit13 in range(1, 10):
-                                                    if occurences.count(digit13) == 2:
+                                                    if not_allowed(13, 2, False):
                                                         continue
-                                                    occurences.append(digit13)
                                                     for digit14 in range(1, 10):
-                                                        if digit14 == digit13 or occurences.count(digit14) == 2:
+                                                        if not_allowed(14, 2, False):
                                                             continue
-                                                        occurences.append(digit14)
                                                         for digit15 in range(1, 10):
-                                                            if digit15 == digit14 or digit15 == digit13  or occurences.count(digit15) == 2:
+                                                            if not_allowed(15, 2, False):
                                                                 continue
-                                                            occurences.append(digit15)
                                                             one_digit_wrong2 = f"{digit13}{digit14}{digit15}"
                                                             one_digit_wrong = [one_digit_wrong1, one_digit_wrong2,
                                                                                two_correct]
@@ -113,7 +107,8 @@ for digit01 in range(1, 10):
                                                             because they will be referenced directly using 
                                                             one_digit_right[0], one_digit_right[1], 
                                                             and one_digit_right[2] in the next loop."""
-                                                            possible_digits_left = [str(digit) for digit in range(1, 10) if
+                                                            possible_digits_left = [str(digit) for digit in range(1, 10)
+                                                                                    if
                                                                                     str(digit) not in wrong_digits and
                                                                                     str(digit) not in one_digit_right]
 
@@ -158,10 +153,10 @@ for digit01 in range(1, 10):
                                                                     print(''.join(map(str, combination)), end=" ")
 
                                                                 end = time.time()
-                                                                if end - start >= 0 :
+                                                                if end - start >= 0:
                                                                     hours, rem = divmod(end - start, 3600)
                                                                     minutes, seconds = divmod(rem, 60)
                                                                     print("\t({:0>2}:{:0>2}:{:05.2f})".format(
-                                                                            int(hours),
-                                                                            int(minutes),
-                                                                            seconds,))
+                                                                        int(hours),
+                                                                        int(minutes),
+                                                                        seconds, ))
