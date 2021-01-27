@@ -15,11 +15,11 @@ def current_time(name):
         print("{:0>2}:{:0>2}:{:05.2f} - {} {} {} {} {} ({})".format(int(hours),
                                                                     int(minutes),
                                                                     seconds,
-                                                                    one_digit_wrong1,
-                                                                    one_digit_right,
-                                                                    two_correct,
-                                                                    wrong_digits,
-                                                                    one_digit_wrong2,
+                                                                    all_digits['one_digit_wrong1'],
+                                                                    all_digits['one_digit_right'],
+                                                                    all_digits['two_correct'],
+                                                                    all_digits['wrong_digits'],
+                                                                    all_digits['one_digit_wrong2'],
                                                                     name))
 
 
@@ -52,8 +52,9 @@ def not_allowed(digit, number_of_occ, time_it):
         if digit_number == 15:
             all_digits['one_digit_wrong2'] = f"{all_digits['13']}{all_digits['14']}{all_digits['15']}"
     occurences.append(digit)
-    if time_it:
-        current_time(f"Digit{digit_number}")
+    if time_it != False:
+        if all_digits['digit_number'] == time_it:
+            current_time(f"Digit{digit_number}")
 
 
 def generate_all_digits(number_of_digits, number_of_occ, time_it):
@@ -146,4 +147,4 @@ start = time.time()
 occurences = []
 all_digits = {'digit_number': 0}
 
-generate_all_digits(15, 2, False)
+generate_all_digits(15, 2, 7)
