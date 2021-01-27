@@ -7,23 +7,15 @@
 import time
 
 
-def current_time(name):
+def current_time():
     end = time.time()
-    if end - start > 1:
+    if end - start >= 0:
         hours, rem = divmod(end - start, 3600)
-        minutes, seconds = divmod(rem, 60)
-        print("{:0>2}:{:0>2}:{:05.2f} - {} {} {} {} {} ({})".format(int(hours),
-                                                                    int(minutes),
-                                                                    seconds,
-                                                                    all_digits['one_digit_wrong1'],
-                                                                    all_digits['one_digit_right'],
-                                                                    all_digits['two_correct'],
-                                                                    all_digits['wrong_digits'],
-                                                                    all_digits['one_digit_wrong2'],
-                                                                    name))
+    minutes, seconds = divmod(rem, 60)
+    print("\t{:0>2}:{:0>2}:{:05.2f} - ".format(int(hours), int(minutes), seconds), end="")
 
 
-def not_allowed(digit, number_of_occ, time_it):
+def not_allowed(digit, number_of_occ):
     digit_number = all_digits['digit_number']
     digit_number_rem = digit_number % 3
     if digit_number_rem == 1:
@@ -52,18 +44,15 @@ def not_allowed(digit, number_of_occ, time_it):
         elif digit_number == 15:
             all_digits['one_digit_wrong2'] = f"{all_digits['13']}{all_digits['14']}{all_digits['15']}"
     occurences.append(digit)
-    if time_it != False:
-        if all_digits['digit_number'] == time_it:
-            current_time(f"Digit{digit_number}")
 
 
-def generate_all_digits(number_of_digits, number_of_occ, time_it, print_or_sum):
+def generate_all_digits(number_of_digits, number_of_occ, print_or_sum):
     all_digits['digit_number'] += 1
     if number_of_digits > 0:
         for digit in range(1, 10):
-            if not_allowed(digit, number_of_occ, time_it):
+            if not_allowed(digit, number_of_occ):
                 continue
-            generate_all_digits(number_of_digits - 1, number_of_occ, time_it, print_or_sum)
+            generate_all_digits(number_of_digits - 1, number_of_occ, print_or_sum)
     all_digits['digit_number'] -= 1
     occurences.pop()
     if all_digits['digit_number'] == 15:
@@ -128,32 +117,31 @@ def check_numbers_against_rules(print_or_sum):
         if print_or_sum == 'sum':
             global sum_of_all, another_thousand
             sum_of_all += 1
-            if sum_of_all > another_thousand:
-                another_thousand += 100000
-                print(f"- One-solution puzzles so far: {sum_of_all}+")
+            if sum_of_all >= another_thousand:
+                another_thousand += 10000000
+                current_time()
+                print(
+                    f"One-solution puzzles so far: {int(sum_of_all / 10000000)} million"
+                    f" - last: {all_digits['one_digit_wrong1']} "
+                    f"{all_digits['one_digit_right']} "
+                    f"{all_digits['two_correct']} "
+                    f"{all_digits['wrong_digits']} "
+                    f"{all_digits['one_digit_wrong2']} ({''.join(map(str, possible_combs[0]))})")
         else:
-            print("\nHere are the possible combinations for "
+            current_time()
+            print("Here are the possible combinations for "
                   f"{one_digit_wrong1} {one_digit_right} "
                   f"{two_correct} {wrong_digits} "
                   f"{one_digit_wrong2}: ",
                   end="")
             for combination in possible_combs:
-                print(''.join(map(str, combination)), end=" ")
-
-            end = time.time()
-            if end - start >= 0:
-                hours, rem = divmod(end - start, 3600)
-                minutes, seconds = divmod(rem, 60)
-                print("\t({:0>2}:{:0>2}:{:05.2f})".format(
-                    int(hours),
-                    int(minutes),
-                    seconds, ))
+                print(''.join(map(str, combination)))
 
 
 start = time.time()
 occurences = []
 all_digits = {'digit_number': 0}
 sum_of_all = 0
-another_thousand = 100000
+another_thousand = 10000000
 
-generate_all_digits(15, 2, 6, 'sum')
+generate_all_digits(15, 2, 'sum')
