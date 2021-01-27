@@ -43,13 +43,13 @@ def not_allowed(digit, number_of_occ, time_it):
         all_digits[str(digit_number)] = digit
         if digit_number == 3:
             all_digits['one_digit_wrong1'] = f"{all_digits['1']}{all_digits['2']}{all_digits['3']}"
-        if digit_number == 6:
+        elif digit_number == 6:
             all_digits['one_digit_right'] = f"{all_digits['4']}{all_digits['5']}{all_digits['6']}"
-        if digit_number == 9:
+        elif digit_number == 9:
             all_digits['two_correct'] = f"{all_digits['7']}{all_digits['8']}{all_digits['9']}"
-        if digit_number == 12:
+        elif digit_number == 12:
             all_digits['wrong_digits'] = f"{all_digits['10']}{all_digits['11']}{all_digits['12']}"
-        if digit_number == 15:
+        elif digit_number == 15:
             all_digits['one_digit_wrong2'] = f"{all_digits['13']}{all_digits['14']}{all_digits['15']}"
     occurences.append(digit)
     if time_it != False:
@@ -57,20 +57,20 @@ def not_allowed(digit, number_of_occ, time_it):
             current_time(f"Digit{digit_number}")
 
 
-def generate_all_digits(number_of_digits, number_of_occ, time_it):
+def generate_all_digits(number_of_digits, number_of_occ, time_it, print_or_sum):
     all_digits['digit_number'] += 1
     if number_of_digits > 0:
         for digit in range(1, 10):
             if not_allowed(digit, number_of_occ, time_it):
                 continue
-            generate_all_digits(number_of_digits - 1, number_of_occ, time_it)
+            generate_all_digits(number_of_digits - 1, number_of_occ, time_it, print_or_sum)
     all_digits['digit_number'] -= 1
     occurences.pop()
     if all_digits['digit_number'] == 15:
-        check_numbers_against_rules()
+        check_numbers_against_rules(print_or_sum)
 
 
-def check_numbers_against_rules():
+def check_numbers_against_rules(print_or_sum):
     one_digit_wrong1 = all_digits['one_digit_wrong1']
     one_digit_right = all_digits['one_digit_right']
     two_correct = all_digits['two_correct']
@@ -125,26 +125,35 @@ def check_numbers_against_rules():
     # 1 left
 
     if len(possible_combs) == 1:
-        print("\nHere are the possible combinations for "
-              f"{one_digit_wrong1} {one_digit_right} "
-              f"{two_correct} {wrong_digits} "
-              f"{one_digit_wrong2}: ",
-              end="")
-        for combination in possible_combs:
-            print(''.join(map(str, combination)), end=" ")
+        if print_or_sum == 'sum':
+            global sum_of_all, another_thousand
+            sum_of_all += 1
+            if sum_of_all > another_thousand:
+                another_thousand += 100000
+                print(f"- One-solution puzzles so far: {sum_of_all}+")
+        else:
+            print("\nHere are the possible combinations for "
+                  f"{one_digit_wrong1} {one_digit_right} "
+                  f"{two_correct} {wrong_digits} "
+                  f"{one_digit_wrong2}: ",
+                  end="")
+            for combination in possible_combs:
+                print(''.join(map(str, combination)), end=" ")
 
-        end = time.time()
-        if end - start >= 0:
-            hours, rem = divmod(end - start, 3600)
-            minutes, seconds = divmod(rem, 60)
-            print("\t({:0>2}:{:0>2}:{:05.2f})".format(
-                int(hours),
-                int(minutes),
-                seconds, ))
+            end = time.time()
+            if end - start >= 0:
+                hours, rem = divmod(end - start, 3600)
+                minutes, seconds = divmod(rem, 60)
+                print("\t({:0>2}:{:0>2}:{:05.2f})".format(
+                    int(hours),
+                    int(minutes),
+                    seconds, ))
 
 
 start = time.time()
 occurences = []
 all_digits = {'digit_number': 0}
+sum_of_all = 0
+another_thousand = 100000
 
-generate_all_digits(15, 2, 7)
+generate_all_digits(15, 2, 6, 'sum')
