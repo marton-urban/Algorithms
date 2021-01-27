@@ -144,4 +144,4 @@ all_digits = {'digit_number': 0}
 sum_of_all = 0
 another_thousand = 10000000
 
-generate_all_digits(6, 2, 'sum')
+generate_all_digits(15, 2, 'sum')
