@@ -64,6 +64,7 @@ def generate_all_digits(number_of_digits, number_of_occ, time_it):
                 continue
             generate_all_digits(number_of_digits - 1, number_of_occ, time_it)
     all_digits['digit_number'] -= 1
+    occurences.pop()
     if all_digits['digit_number'] == 15:
         check_numbers_against_rules()
 
