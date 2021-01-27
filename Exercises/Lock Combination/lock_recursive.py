@@ -121,7 +121,7 @@ def check_numbers_against_rules(print_or_sum):
                 another_thousand += 10000000
                 current_time()
                 print(
-                    f"One-solution puzzles so far: {int(sum_of_all / 10000000)} million"
+                    f"One-solution puzzles so far: {int(sum_of_all / 1000000)} million"
                     f" - last: {all_digits['one_digit_wrong1']} "
                     f"{all_digits['one_digit_right']} "
                     f"{all_digits['two_correct']} "
@@ -144,4 +144,4 @@ all_digits = {'digit_number': 0}
 sum_of_all = 0
 another_thousand = 10000000
 
-generate_all_digits(15, 2, 'sum')
+generate_all_digits(6, 2, 'sum')
