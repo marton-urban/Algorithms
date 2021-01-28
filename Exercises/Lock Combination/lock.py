@@ -14,7 +14,7 @@ one_digit_right[0], one_digit_right[1], and one_digit_right[2] in the next loop.
 possible_digits_left = [digit for digit in range(10) if str(digit) not in wrong_digits and
                         str(digit) not in one_digit_right]
 
-"""Adds all possible combinations by rule 2.
+"""Add all possible combinations by rule 2.
 Direct reference to the digits, all other decimal places will be filled from possible_digits_left."""
 for place in range(3):
     one_possible_comb[place] = int(one_digit_right[place])
@@ -27,7 +27,7 @@ for place in range(3):
             possible_combs.append(list(one_possible_comb))
 # +3*12 possibilities = 36 left
 
-"""Removes all possible combinations by rules 1, 3 and 5.
+"""Remove all possible combinations by rules 1, 3 and 5.
 "two digits are correct but both are in the wrong place" =
 "one digit is right but in the wrong place", the 5 possible permutations are identical"""
 for rule in one_digit_wrong:
