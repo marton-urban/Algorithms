@@ -34,10 +34,10 @@ for place in range(3):
 for rule in one_digit_wrong:
     for place in range(3):
         [possible_combs.remove(possible_combination) for possible_combination in possible_combs.copy()
-         if int(rule[place]) == possible_combination[place] or
-         (int(rule[0]) not in possible_combination and
-          int(rule[1]) not in possible_combination and
-          int(rule[2]) not in possible_combination)
+         if int(rule[place]) == possible_combination[place] or not
+         (int(rule[0]) in possible_combination or
+          int(rule[1]) in possible_combination or
+          int(rule[2]) in possible_combination)
          ]
         place += 1
 # 1 left
