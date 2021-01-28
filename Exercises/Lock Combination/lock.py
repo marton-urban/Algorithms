@@ -29,7 +29,7 @@ for place in range(3):
 
 """Removes all possible combinations by rules 1, 3 and 5.
 "two digits are correct but both are in the wrong place" =
-"one digit is right but in the wrong place", the 5 possible permutations are identical)"""
+"one digit is right but in the wrong place", the 5 possible permutations are identical"""
 for rule in one_digit_wrong:
     for place in range(3):
         [possible_combs.remove(possible_combination) for possible_combination in possible_combs.copy()
