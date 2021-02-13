@@ -10,7 +10,8 @@ possible_combs = []
 
 """Rule 4 and initialization for rule 2:
 Remove the digits of rule 2 as well, because they will be referenced directly using 
-one_digit_right[0], one_digit_right[1], and one_digit_right[2] in the next loop."""
+one_digit_right[0], one_digit_right[1], and one_digit_right[2] in the next loop.
+Added removing of digits that none of the rules contain (in default case the digit 0)."""
 possible_digits_left = [digit for digit in range(10) if
                         str(digit) in one_digit_wrong1 + two_correct + one_digit_wrong2 and
                         str(digit) not in wrong_digits + one_digit_right]
