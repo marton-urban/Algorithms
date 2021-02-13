@@ -1,0 +1,41 @@
+BÁRMILYEN számkombinációkra megoldja a feladatot. Most a példa kedvéért a feladatban szereplőkkel fogom szemléltetni a lépéseket.
+
+Ha tudtok jobbat vagy egyszerűbbet, szóljatok (bár így is sikerült 50 sor alatt az egész):
+
+Először is észrevettem teljesen véletlenül (miközben máshogy próbálkoztam), hogy a 3-as szabály szövegezése helyettesíthető az 1-essel, illetve 5-össel, így három ugyanolyan szabályunk van (ha nem hiszitek, írjátok fel a lehetséges permutációkat, 5 ugyanazon szám jön ki). Tehát: két számjegy helyes, de mindkettő rossz helyen van = egy számjegy helyes csak, de az rossz helyen van.
+
+A program az alábbi lépésekkel oldja meg a feladványt, turbó sebességgel (csatoltam rövid videót):
+
+- Felírja 0-tól 9-ig a számokat egyesével, ezek lesznek a lehetséges számjegyek (én beleraktam a 0-át is, miért ne).
+[0,1,2,3,4,5,6,7,8,9]
+
+- Ezekből rögtön eltávolítja a 4-es szabály számjegyeit (523), azokra nincs többé szükség.
+[0,1,4,6,7,8,9]
+
+- Eltávolítja azon számjegyeket, melyek egyik szabályban sem szerepelnek (ez esetben a 0-át).
+
+- A megmaradt számjegyekből szintén eltávolítja az 1-es szabály számjegyeit is (147), mert azokat külön fogom felhasználni.
+Maradt: [6,8,9]
+
+- Ezután a program összegyűjti az összes lehetséges kombinációt a megmaradt számjegyekből a 2-es szabály felhasználásával, úgy hogy feltételezi hogy mindhárom számjegy a helyén van (189), az üres helyekre pedig permutációval behelyettesíti a megmaradt számjegyeket (tehát mindig 4*3 = 12 lehetőséget ad hozzá a totálhoz). 36 lehetőség maradt a megoldásra, ebben így mindenképpen benne van a helyes.
+Amikor az '1' van a helyén:
+[1,4,6] [1,4,7] [1,6,4] [1,6,7] [1,7,4] [1,7,6]
+
+Amikor a '8' van a helyén:
+[4,8,6] [4,8,7] [6,8,4] [6,8,7] [7,8,4] [7,8,6]
+
+Amikor a '9' van a helyén:
+[4,6,9] [4,7,9] [6,4,9] [6,7,9] [7,4,9] [7,6,9]
+
+- Végül a három megmaradt - ugyanolyan - szabályt kielégítve, mindhárom számkombinációnál olyan permutációkat generál, melyekben mindhárom számjegyre megint feltételezi, hogy helyesek. Tehát a különböző helyiértékekre behelyettesít a megmaradt számjegyekből egyet-egyet, figyelve arra, hogy a helyesnek feltételezett szám NE kerüljön oda ahol eredetileg volt, és a két rossznak feltételezett számjegy se kerüljön bele. Ezeket pedig eltávolítja a 36 lehetőségből.
+
+[1,4,7] után marad:
+[4,8,6] [6,8,4] [7,8,4] [7,8,6] [4,6,9] [4,7,9] [6,7,9] [7,6,9]
+
+[2,8,6] után marad:
+[4,6,9] [6,7,9] [7,6,9]
+
+[9,6,4] után marad:
+[6,7,9]
+
+Így a végén csak azok maradnak, amik megfelelnek az összes szabálynak. Esetünkben csak a 679.
