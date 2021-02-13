@@ -26,7 +26,7 @@ for place in range(3):
             one_possible_comb[pos[0]] = first
             one_possible_comb[pos[1]] = second
             possible_combs.append(list(one_possible_comb))
-# +3*12 possibilities = 36 left
+# +3*6 possibilities = 18 left
 
 """Remove all possible combinations by rules 1, 3 and 5.
 "two digits are correct but both are in the wrong place" =
